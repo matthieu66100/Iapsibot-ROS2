@@ -23,7 +23,7 @@ private:
     void callbackFunctionString(std::shared_ptr<const std_msgs::msg::String> msg){
 
         std::stringstream printedMsg;
-        printedMsg << "I heard on topic 'stringTopic : ' " << msg->data; 
+        printedMsg << "I heard on topic 'stringTopic' : " << msg->data; 
         RCLCPP_INFO(this->get_logger(), printedMsg.str().c_str());
     }
 

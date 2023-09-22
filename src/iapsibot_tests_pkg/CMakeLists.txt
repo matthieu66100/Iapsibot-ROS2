@@ -18,22 +18,12 @@ find_package(OpenCV 4 REQUIRED)
 # test publisher
 add_executable(test_com_publisher src/test_com_publisher.cpp)
 target_include_directories(test_com_publisher PRIVATE ./)
-target_include_directories(test_com_publisher PRIVATE ${rclcpp_INCLUDE_DIRS})
-target_link_libraries(test_com_publisher ${rclcpp_LIBRARIES})
-target_include_directories(test_com_publisher PRIVATE ${std_msgs_INCLUDE_DIRS})
-target_link_libraries(test_com_publisher ${std_msgs_LIBRARIES})
-target_include_directories(test_com_publisher PRIVATE ${sensor_msgs_INCLUDE_DIRS})
-target_link_libraries(test_com_publisher ${sensor_msgs_LIBRARIES})
-ament_target_dependencies(test_com_publisher rclcpp std_msgs)
+ament_target_dependencies(test_com_publisher rclcpp std_msgs sensor_msgs)
 
 # test suscriber
 add_executable(test_com_suscriber src/test_com_suscriber.cpp)
 target_include_directories(test_com_suscriber PRIVATE ./)
-target_include_directories(test_com_suscriber PRIVATE ${rclcpp_INCLUDE_DIRS})
-target_include_directories(test_com_suscriber PRIVATE ${std_msgs_INCLUDE_DIRS})
-target_include_directories(test_com_suscriber PRIVATE ${sensor_msgs_INCLUDE_DIRS})
-target_link_libraries(test_com_suscriber ${sensor_msgs_LIBRARIES})
-ament_target_dependencies(test_com_suscriber rclcpp std_msgs)
+ament_target_dependencies(test_com_suscriber rclcpp std_msgs sensor_msgs)
 
 # Installs
 install(TARGETS test_com_publisher DESTINATION lib/${PROJECT_NAME})
