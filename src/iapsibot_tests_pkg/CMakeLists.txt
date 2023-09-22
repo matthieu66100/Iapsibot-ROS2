@@ -15,15 +15,18 @@ find_package(std_msgs REQUIRED)
 # Lib OpenCV
 find_package(OpenCV 4 REQUIRED)
 
+# Custom interfaces
+find_package(iapsibot_interfaces_pkg REQUIRED) 
+
 # test publisher
 add_executable(test_com_publisher src/test_com_publisher.cpp)
 target_include_directories(test_com_publisher PRIVATE ./)
-ament_target_dependencies(test_com_publisher rclcpp std_msgs sensor_msgs)
+ament_target_dependencies(test_com_publisher rclcpp std_msgs sensor_msgs iapsibot_interfaces_pkg)
 
 # test suscriber
 add_executable(test_com_suscriber src/test_com_suscriber.cpp)
 target_include_directories(test_com_suscriber PRIVATE ./)
-ament_target_dependencies(test_com_suscriber rclcpp std_msgs sensor_msgs)
+ament_target_dependencies(test_com_suscriber rclcpp std_msgs sensor_msgs iapsibot_interfaces_pkg)
 
 # Installs
 install(TARGETS test_com_publisher DESTINATION lib/${PROJECT_NAME})

@@ -1,0 +1,3 @@
+sensor_msgs/range rangeLeftSonar
+sensor_msgs/range rangeCenterSonar
+sensor_msgs/range rangeRightSonar

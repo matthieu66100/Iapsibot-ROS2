@@ -10,7 +10,6 @@ using namespace std::chrono_literals;
 
 /**
  * @brief Teste la réception d'image, l'etat du robot et publie les commandes vers le robot
- * 
  */
 class TestComPublisher : public rclcpp::Node
 {
@@ -28,7 +27,7 @@ private:
   void timerCallbackString()
   {
     auto message = std_msgs::msg::String();
-    message.data = "Bonjour le monde " + std::to_string(mCount++);
+    message.data = "🤖 : Bonjour le monde " + std::to_string(mCount++);
     RCLCPP_INFO(this->get_logger(), "Publishing: '%s'", message.data.c_str());
     mPublisher->publish(message);
   }
