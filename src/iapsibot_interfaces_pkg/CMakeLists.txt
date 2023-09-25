@@ -7,11 +7,15 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
-find_package(rosidl_default_generators REQUIRED) #For generatign interfaces
 find_package(builtin_interfaces REQUIRED) # For access to existing interfaces
 find_package(sensor_msgs REQUIRED)
 
-rosidl_generate_interfaces(${PROJET_NAME} "msg/Wheels.msg")
+find_package(rosidl_default_generators REQUIRED) #For generating interfaces
+rosidl_generate_interfaces(${PROJECT_NAME} 
+  "msg/Wheels.msg"
+  "msg/SonarRanges.msg"
+  DEPENDENCIES sensor_msgs
+)
 
 ament_export_dependencies(rosidl_default_runtime)
 

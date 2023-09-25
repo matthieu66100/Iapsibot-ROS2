@@ -1,2 +1,2 @@
-float32 leftWheelRotationRad
-float32 rightWheelRotationRad
+float32 left_wheel_rotation_rad
+float32 right_wheel_rotation_rad

@@ -16,7 +16,7 @@ find_package(std_msgs REQUIRED)
 find_package(OpenCV 4 REQUIRED)
 
 # Custom interfaces
-find_package(iapsibot_interfaces_pkg REQUIRED) 
+find_package(iapsibot_interfaces_pkg REQUIRED)
 
 # test publisher
 add_executable(test_com_publisher src/test_com_publisher.cpp)
