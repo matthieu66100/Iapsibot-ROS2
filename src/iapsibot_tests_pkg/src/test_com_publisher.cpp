@@ -7,17 +7,18 @@
 #include "std_msgs/msg/string.hpp"
 #include "sensor_msgs/msg/range.hpp"
 #include "iapsibot_interfaces_pkg/msg/wheels.hpp"
+#include "iapsibot_interfaces_pkg/msg/sonar_ranges.hpp"
 // #include "/home/benjamin/iapsibot_ws/src/iapsibot_interfaces_pkg/install/iapsibot_interfaces_pkg/include/iapsibot_interfaces_pkg/iapsibot_interfaces_pkg/msg/wheels.hpp"
 
 using namespace std::chrono_literals;
 
 /**
- * @brief Teste la réception d'image, l'etat du robot et publie les commandes vers le robot
+ * @brief TestComPublisher : Teste la réception d'image, l'etat du robot et publie les commandes vers le robot
  */
 class TestComPublisher : public rclcpp::Node
 {
 public:
-  TestComPublisher()
+  TestComPublisher() 
   : Node("test_com_publisher"), mCount(0)
   {
     mPublisher = this->create_publisher<std_msgs::msg::String>("stringTopic", 10);
@@ -43,7 +44,7 @@ int main(int argc, char * argv[])
 {
   rclcpp::init(argc, argv);
 
-  iapsibot_interfaces_pkg::Wheels wheelsMessageTestCreation;
+  iapsibot_interfaces_pkg::msg::Wheels wheelsMessageTestCreation;
   // iapsibot_interfaces_pkg::nexistepas nonexistant;
 
   rclcpp::spin(std::make_shared<TestComPublisher>());

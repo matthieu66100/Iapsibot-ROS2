@@ -20,13 +20,14 @@ find_package(iapsibot_interfaces_pkg REQUIRED)
 
 # test publisher
 add_executable(test_com_publisher src/test_com_publisher.cpp)
-target_include_directories(test_com_publisher PRIVATE ./)
+target_include_directories(test_com_publisher PRIVATE ./ iapsibot_interfaces_pkg)
 ament_target_dependencies(test_com_publisher rclcpp std_msgs sensor_msgs iapsibot_interfaces_pkg)
 
 # test suscriber
 add_executable(test_com_suscriber src/test_com_suscriber.cpp)
 target_include_directories(test_com_suscriber PRIVATE ./)
-ament_target_dependencies(test_com_suscriber rclcpp std_msgs sensor_msgs iapsibot_interfaces_pkg)
+
+ament_target_dependencies(test_com_suscriber rclcpp std_msgs sensor_msgs )
 
 # Installs
 install(TARGETS test_com_publisher DESTINATION lib/${PROJECT_NAME})
