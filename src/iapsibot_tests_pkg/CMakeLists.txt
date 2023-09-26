@@ -27,7 +27,7 @@ ament_target_dependencies(test_com_publisher rclcpp std_msgs sensor_msgs iapsibo
 add_executable(test_com_suscriber src/test_com_suscriber.cpp)
 target_include_directories(test_com_suscriber PRIVATE ./)
 
-ament_target_dependencies(test_com_suscriber rclcpp std_msgs sensor_msgs )
+ament_target_dependencies(test_com_suscriber rclcpp std_msgs sensor_msgs iapsibot_interfaces_pkg)
 
 # Installs
 install(TARGETS test_com_publisher DESTINATION lib/${PROJECT_NAME})
