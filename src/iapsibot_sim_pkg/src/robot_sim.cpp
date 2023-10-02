@@ -53,7 +53,7 @@ namespace robot_sim {
     wb_motor_set_velocity(right_motor, command_motor_right);
   }
   
-} // namespace my_robot_driver
+} // namespace robot_sim
 
 
 PLUGINLIB_EXPORT_CLASS(robot_sim::RobotDriver,

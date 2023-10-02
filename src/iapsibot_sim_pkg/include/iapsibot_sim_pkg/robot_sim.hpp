@@ -18,8 +18,7 @@ namespace robot_sim {
   private:
     void cmdVelCallback(const geometry_msgs::msg::Twist::SharedPtr msg);
 
-    rclcpp::Subscription<geometry_msgs::msg::Twist>::SharedPtr
-        cmd_vel_subscription_;
+    rclcpp::Subscription<geometry_msgs::msg::Twist>::SharedPtr cmd_vel_subscription_;
     geometry_msgs::msg::Twist cmd_vel_msg;
 
     WbDeviceTag right_motor;
