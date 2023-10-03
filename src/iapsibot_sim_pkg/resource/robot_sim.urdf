@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
-<robot name="My robot">
+<robot xmlns:xacro="http;//www.ros.org/wiki/xacro" name="Boku no roboto">
     <webots>
-        <plugin type="robot_sim::RobotDriver" />
+        <plugin type="robot_sim::RobotDriver"/>
     </webots>
 </robot>

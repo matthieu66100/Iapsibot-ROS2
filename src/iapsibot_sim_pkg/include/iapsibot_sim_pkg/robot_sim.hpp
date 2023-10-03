@@ -18,11 +18,14 @@ namespace robot_sim {
   private:
     void cmdVelCallback(const geometry_msgs::msg::Twist::SharedPtr msg);
 
-    rclcpp::Subscription<geometry_msgs::msg::Twist>::SharedPtr cmd_vel_subscription_;
-    geometry_msgs::msg::Twist cmd_vel_msg;
+    rclcpp::Subscription<geometry_msgs::msg::Twist>::SharedPtr mCmdVelSubscription;
+    geometry_msgs::msg::Twist mCmdVelMsg;
 
-    WbDeviceTag right_motor;
-    WbDeviceTag left_motor;
+    WbDeviceTag mRightMotor;
+    WbDeviceTag mLeftMotor;
+
+    const double mHALF_DISTANCE_BETWEEN_WHEELS = 0.045;
+    const double mWHEEL_RADIUS =  0.025;
   };
 } // namespace robot_sim
 #endif
