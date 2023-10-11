@@ -17,16 +17,6 @@ def generate_launch_description():
         world=os.path.join(package_dir, 'worlds', 'my_world.wbt')
     )
 
-    # robot_driver = Node(
-    #     package='webots_ros2_driver',
-    #     executable='driver',
-    #     output='screen',
-    #     additional_env={'WEBOTS_CONTROLLER_URL': controller_url_prefix() + 'robot_sim'},
-    #     parameters=[
-    #         {'robot_description': robot_description},
-    #     ]
-    # )
-
     robot_driver = WebotsController(
         robot_name='robot_sim',
         parameters=[

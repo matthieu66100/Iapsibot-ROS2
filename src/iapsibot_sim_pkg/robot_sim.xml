@@ -3,7 +3,7 @@
   <!-- The `base_class_type` attribute is always `webots_ros2_driver::PluginInterface`. -->
   <class type="robot_sim::RobotDriver" base_class_type="webots_ros2_driver::PluginInterface">
     <description>
-      This is a Webots ROS 2 plugin example
+      The ROS2 plugin for the robot simulation 
     </description>
   </class>
 </library>

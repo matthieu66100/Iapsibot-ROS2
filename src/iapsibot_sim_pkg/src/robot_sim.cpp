@@ -29,8 +29,7 @@ namespace robot_sim {
         std::bind(&RobotDriver::cmdVelCallback, this, std::placeholders::_1));
   }
 
-  void RobotDriver::cmdVelCallback(
-      const geometry_msgs::msg::Twist::SharedPtr msg) {
+  void RobotDriver::cmdVelCallback(const geometry_msgs::msg::Twist::SharedPtr msg) {
     mCmdVelMsg.linear = msg->linear;
     mCmdVelMsg.angular = msg->angular;
   }
