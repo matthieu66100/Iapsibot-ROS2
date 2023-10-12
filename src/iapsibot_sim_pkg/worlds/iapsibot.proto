@@ -133,8 +133,8 @@ PROTO iapsibot []
                 aperture 1
             }
             DistanceSensor {
-                translation 0.1 0 0.063 # 0.042 à changer
-                rotation 0 0 1 -0.5235996938995747
+                translation 0.046 0 0.063 # 0.042 à changer
+                rotation 0 0 1 0
                 children [
                     USE SENSOR
                 ]
