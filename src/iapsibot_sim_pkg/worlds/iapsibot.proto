@@ -1,6 +1,8 @@
 #VRML_SIM R2023b utf8
 
-PROTO iapsibot []
+PROTO iapsibot [
+    field SFVec3f scaleVector 1e-3 1e-3 1e-3
+]
 {
     Robot {
         name "robot_sim"
@@ -8,6 +10,27 @@ PROTO iapsibot []
         physics Physics {}
 
         children [
+
+            Transform {
+                # translation 0 0 0.0415
+                rotation 1 0 0 pi/2
+                scale IS scaleVector
+                children [
+                    Shape {
+                        appearance PBRAppearance {
+                            baseColor 1 .5 .5
+                            roughness 1
+                            metalness 0
+                        }
+
+                        geometry Mesh {
+                            url  ["3D_files/Carrosserie.stl"]
+                            ccw TRUE
+                        }
+                    }
+                ]
+            }
+            
             HingeJoint {
                 jointParameters HingeJointParameters {
                     axis 0 1 0
@@ -15,28 +38,28 @@ PROTO iapsibot []
                 }
                 device [
                     RotationalMotor {
-                    name "left wheel motor"
+                        name "left wheel motor"
                     }
                 ]
                 endPoint Solid {
                     translation 0 0.045 0.025
                     children [
-                    DEF WHEEL Transform {
-                        rotation 1 0 0 1.5707996938995747
-                        children [
-                        Shape {
-                            appearance PBRAppearance {
-                            baseColor 1 0 0
-                            roughness 1
-                            metalness 0
-                            }
-                            geometry Cylinder {
-                            height 0.01
-                            radius 0.025
-                            }
+                        DEF WHEEL Transform {
+                            rotation 1 0 0 1.5707996938995747
+                            children [
+                                Shape {
+                                    appearance PBRAppearance {
+                                        baseColor 1 0 0
+                                        roughness 1
+                                        metalness 0
+                                    }
+                                    geometry Cylinder {
+                                        height 0.01
+                                        radius 0.025
+                                    }
+                                }
+                            ]
                         }
-                        ]
-                    }
                     ]
                     name "left wheel"
                     boundingObject USE WHEEL
@@ -50,19 +73,16 @@ PROTO iapsibot []
                     anchor 0 0 0.025
                 }
                 device [
-                    RotationalMotor {
-                    name "right wheel motor"
-                    }
+                    RotationalMotor {name "right wheel motor"}
                 ]
                 endPoint Solid {
                     translation 0 -0.045 0.025
                     children [
-                    USE WHEEL
+                        USE WHEEL
                     ]
                     name "right wheel"
                     boundingObject USE WHEEL
-                    physics Physics {
-                    }
+                    physics Physics {}
                 }
             }
             Transform {
@@ -81,6 +101,7 @@ PROTO iapsibot []
                     }
                 ]
             }
+
             DistanceSensor {
                 translation 0.042 0.02 0.063
                 rotation 0 0 1 0.5236003061004253
@@ -89,15 +110,15 @@ PROTO iapsibot []
                         rotation 0 1 0 1.5708
                         children [
                             Shape {
-                            appearance PBRAppearance {
-                                baseColor 1 1 0
-                                roughness 1
-                                metalness 0
-                            }
-                            geometry Cylinder {
-                                height 0.004
-                                radius 0.008
-                            }
+                                appearance PBRAppearance {
+                                    baseColor 1 1 0
+                                    roughness 1
+                                    metalness 0
+                                }
+                                geometry Cylinder {
+                                    height 0.004
+                                    radius 0.008
+                                }
                             }
                         ]
                     }
@@ -114,9 +135,7 @@ PROTO iapsibot []
             DistanceSensor {
                 translation 0.042 -0.02 0.063
                 rotation 0 0 1 -0.5235996938995747
-                children [
-                    USE SENSOR
-                ]
+                children [USE SENSOR]
                 name "right"
                 lookupTable [
                     0 1020 0
@@ -129,9 +148,7 @@ PROTO iapsibot []
             DistanceSensor {
                 translation 0.046 0 0.063
                 rotation 0 0 1 0
-                children [
-                    USE SENSOR
-                ]
+                children [USE SENSOR]
                 name "center"
                 lookupTable [
                     0 1020 0
@@ -143,8 +160,9 @@ PROTO iapsibot []
             }
         ]
         
+        # La hitbot
         boundingObject Transform {
-            translation 0 0 0.0415
+            translation 0 0 0.0415 #0.0415 la mi hauteur
             children [USE BODY]
         }
     }

@@ -12,8 +12,8 @@
 namespace robot_sim {
 
   void RobotDriver::init(
-      webots_ros2_driver::WebotsNode *node,
-      std::unordered_map<std::string, std::string> &parameters) {
+    webots_ros2_driver::WebotsNode *node,
+    std::unordered_map<std::string, std::string> &parameters) {
 
     mRightMotor = wb_robot_get_device("right wheel motor");
     mLeftMotor = wb_robot_get_device("left wheel motor");
