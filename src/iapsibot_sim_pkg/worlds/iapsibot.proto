@@ -11,26 +11,53 @@ PROTO iapsibot [
 
         children [
 
+            # Carrosserie définie par les fichiers STL 3D
+            DEF CAROSSERIE Transform {
+                rotation 0 0 1 1.57079632679
+                children [ 
+                    Transform {
+                        # translation 0 0 0.0415
+                        rotation 1 0 0 1.57079632679
+                        scale IS scaleVector
+                        children [
+                            Shape {
+                                appearance PBRAppearance {
+                                    baseColor 1 .5 .5
+                                    roughness 1
+                                    metalness 0
+                                }
+
+                                geometry Mesh {
+                                    url  ["3D_files/Carrosserie.stl"]
+                                    ccw TRUE
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+
+
+            # Old body
             Transform {
-                # translation 0 0 0.0415
-                rotation 1 0 0 pi/2
-                scale IS scaleVector
+                # DEF boundsHeight float 5
+                translation 0 0 2.5e-2
                 children [
                     Shape {
                         appearance PBRAppearance {
-                            baseColor 1 .5 .5
+                            baseColor 0 0 1
                             roughness 1
                             metalness 0
                         }
-
-                        geometry Mesh {
-                            url  ["3D_files/Carrosserie.stl"]
-                            ccw TRUE
+                        geometry DEF BODY_OLD Cylinder {
+                            height 5e-2 #0.08
+                            radius 9e-2 #0.045
                         }
                     }
                 ]
             }
             
+            # Left wheel
             HingeJoint {
                 jointParameters HingeJointParameters {
                     axis 0 1 0
@@ -67,6 +94,8 @@ PROTO iapsibot [
                     }
                 }
             }
+
+            # Right wheel
             HingeJoint {
                 jointParameters HingeJointParameters {
                     axis 0 1 0
@@ -85,23 +114,8 @@ PROTO iapsibot [
                     physics Physics {}
                 }
             }
-            Transform {
-                translation 0 0 0.0415
-                children [
-                    Shape {
-                    appearance PBRAppearance {
-                        baseColor 0 0 1
-                        roughness 1
-                        metalness 0
-                    }
-                    geometry DEF BODY Cylinder {
-                        height 0.08
-                        radius 0.045
-                    }
-                    }
-                ]
-            }
 
+            # Left sensor
             DistanceSensor {
                 translation 0.042 0.02 0.063
                 rotation 0 0 1 0.5236003061004253
@@ -132,6 +146,8 @@ PROTO iapsibot [
                 numberOfRays 2
                 aperture 1
             }
+
+            # Center sensor
             DistanceSensor {
                 translation 0.042 -0.02 0.063
                 rotation 0 0 1 -0.5235996938995747
@@ -145,6 +161,8 @@ PROTO iapsibot [
                 numberOfRays 2
                 aperture 1
             }
+
+            # Right sensor
             DistanceSensor {
                 translation 0.046 0 0.063
                 rotation 0 0 1 0
@@ -160,10 +178,11 @@ PROTO iapsibot [
             }
         ]
         
-        # La hitbot
+        # La hitbox
         boundingObject Transform {
-            translation 0 0 0.0415 #0.0415 la mi hauteur
-            children [USE BODY]
+            # translation 0 0 0.0415 #0.0415 la mi hauteur
+            translation 0 0 2.51e-2
+            children [USE BODY_OLD]
         }
     }
 }
