@@ -36,32 +36,12 @@ PROTO iapsibot [
                     }
                 ]
             }
-
-
-            # Old body
-            Transform {
-                # DEF boundsHeight float 5
-                translation 0 0 2.5e-2
-                children [
-                    Shape {
-                        appearance PBRAppearance {
-                            baseColor 0 0 1
-                            roughness 1
-                            metalness 0
-                        }
-                        geometry DEF BODY_OLD Cylinder {
-                            height 5e-2 #0.08
-                            radius 9e-2 #0.045
-                        }
-                    }
-                ]
-            }
             
             # Left wheel
             HingeJoint {
                 jointParameters HingeJointParameters {
                     axis 0 1 0
-                    anchor 0 0 0.025
+                    anchor 0.01 0.08 0.020
                 }
                 device [
                     RotationalMotor {
@@ -69,7 +49,7 @@ PROTO iapsibot [
                     }
                 ]
                 endPoint Solid {
-                    translation 0 0.045 0.025
+                    translation 0.01 0.08 0.020 #tz = radius
                     children [
                         DEF WHEEL Transform {
                             rotation 1 0 0 1.5707996938995747
@@ -82,7 +62,7 @@ PROTO iapsibot [
                                     }
                                     geometry Cylinder {
                                         height 0.01
-                                        radius 0.025
+                                        radius 0.020
                                     }
                                 }
                             ]
@@ -99,13 +79,13 @@ PROTO iapsibot [
             HingeJoint {
                 jointParameters HingeJointParameters {
                     axis 0 1 0
-                    anchor 0 0 0.025
+                    anchor 0.01 0 0.020
                 }
                 device [
                     RotationalMotor {name "right wheel motor"}
                 ]
                 endPoint Solid {
-                    translation 0 -0.045 0.025
+                    translation 0.01 -0.08 0.020
                     children [
                         USE WHEEL
                     ]
@@ -181,8 +161,13 @@ PROTO iapsibot [
         # La hitbox
         boundingObject Transform {
             # translation 0 0 0.0415 #0.0415 la mi hauteur
-            translation 0 0 2.51e-2
-            children [USE BODY_OLD]
+            translation 0 0 2.51e-2 # 5e-2/2 = 2.5e-2. On prend 2.51 pour éviter les frottements qui empèchent le robot de se mouvoir
+            children [
+                Cylinder {
+                    height 5e-2 
+                    radius 9e-2 
+                }
+            ]
         }
     }
 }
