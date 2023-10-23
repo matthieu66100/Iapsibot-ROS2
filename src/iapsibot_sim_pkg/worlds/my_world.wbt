@@ -14,10 +14,34 @@ Viewpoint {
   follow "robot_sim" 
 }
 
+# an obstacle
+Solid {
+  children [
+    DEF OBSTACLE_SHAPE Transform{ 
+      translation 0.5 0 0
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 1 0 0
+            roughness 1
+            metalness 0
+          }
+          geometry Cylinder {
+            height 0.05
+            radius 0.020
+          }
+        }
+      ]
+    }
+  ]
+
+  boundingObject USE OBSTACLE_SHAPE
+  physics Physics{}
+}
+
 TexturedBackground {}
 TexturedBackgroundLight {}
 CircleArena {}
 
 # Out robot defined in iapsibot.proto
 iapsibot{}
-
