@@ -1,0 +1,16 @@
+version: '2'
+
+services:
+  novnc:
+    image: theasp/novnc:latest
+    environment:
+      -"DISPLAY_WIDTH=3000"
+      -"DISPLAY_HEIGHT=1800"
+      -"RUN_XTERM=no"
+    ports:
+      -"8080:8080"
+  ros:
+    image: osrf/ros:humble-desktop
+    build: .
+    depends_on:
+      - novnc
