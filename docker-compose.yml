@@ -2,6 +2,7 @@ version: '2'
 
 services:
   novnc:
+    container_name : VNC
     image: theasp/novnc:latest
     environment:
       - "DISPLAY_WIDTH=3000"
@@ -11,13 +12,21 @@ services:
       - "8080:8080"
     networks: 
       - ros_nw
-  ros:
+  
+  create_ros_project_img:
+    image: ros_img
     build: .
+  
+  ros:
+    image: ros_img
+    container_name : ROS2
     depends_on:
+      - create_ros_project_img
       - novnc
     networks: 
       - ros_nw
-
+    tty: true
+  
 networks:
   ros_nw: 
-    name: ros 
+    name: ros_nw
