@@ -13,12 +13,10 @@ services:
     networks: 
       - ros_nw
   
-  create_ros_project_img:
-    image: ros_img
-    build: .
-  
   ros:
-    image: ros_img
+    image: ros_img:latest
+    build: 
+      context: .
     container_name : ROS2
     depends_on:
       - novnc
