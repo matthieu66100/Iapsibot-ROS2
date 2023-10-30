@@ -21,7 +21,6 @@ services:
     image: ros_img
     container_name : ROS2
     depends_on:
-      - create_ros_project_img
       - novnc
     networks: 
       - ros_nw
