@@ -1,5 +1,8 @@
 FROM ros:humble-ros-base
 
+# Use bash instead of shell
+SHELL ["/bin/bash", "-c"]
+
 # Update and install packages and tools
 RUN apt-get update && apt-get install -y git wget python3-pip vim
 RUN pip3 install setuptools==58.2.0
@@ -18,10 +21,3 @@ WORKDIR /ros2_ws
 
 # Set the display on NOVNC docker
 ENV DISPLAY=novnc:0.0
-ENV DISTRO=humble
-
-# Setup the environment
-#CMD echo "source /opt/ros/humble/setup.bash; echo test frero; /bin/sleep 300" | bash 
-CMD bash <<< source /opt/ros/humble/setup.bash; echo test frero; /bin/sleep 300
- 
-#. /opt/ros/humble/setup.bash; 
