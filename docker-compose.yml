@@ -14,10 +14,10 @@ services:
       - ros_nw
   
   ros:
-    image: ros_img:latest
+    image: ros_iapsibot:latest
     build: 
       context: .
-    container_name : ROS2
+    container_name : bipboup
     depends_on:
       - novnc
     networks: 
