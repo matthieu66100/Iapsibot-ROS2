@@ -1,0 +1,172 @@
+#VRML_SIM R2023b utf8
+
+PROTO iapsibot [
+    field SFVec3f scaleVector 1e-3 1e-3 1e-3
+]
+{
+    Robot {
+        name "robot_sim"
+        controller "<extern>"
+        physics Physics {}
+
+        children [
+            # Carrosserie définie par les fichiers STL 3D
+            DEF CAROSSERIE Transform {
+                rotation 0 0 1 1.57079632679
+                children [ 
+                    Transform {
+                        # translation 0 0 0.0415
+                        rotation 1 0 0 1.57079632679
+                        translation 0 0 0.002
+                        scale IS scaleVector
+                        children [
+                            Shape {
+                                appearance PBRAppearance {
+                                    baseColor 1 .5 .5
+                                    roughness 1
+                                    metalness 0
+                                }
+
+                                geometry Mesh {
+                                    url  ["3D_files/Carrosserie.stl"]
+                                    ccw TRUE
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+            
+            # Left wheel
+            HingeJoint {
+                jointParameters HingeJointParameters {
+                    axis 0 1 0
+                    anchor 0.01 0.08 0.020
+                }
+                device [
+                    RotationalMotor {
+                        name "left wheel motor"
+                    }
+                ]
+                endPoint Solid {
+                    translation 0.01 0.08 0.020 #tz = radius
+                    children [
+                        DEF WHEEL Transform {
+                            rotation 1 0 0 1.5707996938995747
+                            children [
+                                Shape {
+                                    appearance PBRAppearance {
+                                        baseColor 1 0 0
+                                        roughness 1
+                                        metalness 0
+                                    }
+                                    geometry Cylinder {
+                                        height 0.01
+                                        radius 0.020
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                    name "left wheel"
+                    boundingObject USE WHEEL
+                    physics Physics {}
+                }
+            }
+
+            # Right wheel
+            HingeJoint {
+                jointParameters HingeJointParameters {
+                    axis 0 1 0
+                    anchor 0.01 0 0.020
+                }
+                device [
+                    RotationalMotor {name "right wheel motor"}
+                ]
+                endPoint Solid {
+                    translation 0.01 -0.08 0.020
+                    children [
+                        USE WHEEL
+                    ]
+                    name "right wheel"
+                    boundingObject USE WHEEL
+                    physics Physics {}
+                }
+            }
+
+            # Left sensor
+            DistanceSensor {
+                translation 0.06 0.07 0.038
+                rotation 0 0 1 0.8 # 0.5236003061004253
+                children [
+                    DEF SENSOR Transform {
+                        rotation 0 1 0 1.5708
+                        children [
+                            Shape {
+                                appearance PBRAppearance {
+                                    baseColor 1 1 0
+                                    roughness 1
+                                    metalness 0
+                                }
+                                geometry Cylinder {
+                                    height 0.004
+                                    radius 0.010
+                                }
+                            }
+                        ]
+                    }
+                ]
+                name "left"
+                lookupTable [
+                    0 1020 0
+                    0.05 1020 0
+                    0.15 0 0
+                ]
+                numberOfRays 2
+                aperture 1
+            }
+
+            # Right sensor
+            DistanceSensor {
+                translation 0.06 -0.07 0.038
+                rotation 0 0 1 -0.8
+                children [USE SENSOR]
+                name "right"
+                lookupTable [
+                    0 1020 0
+                    0.05 1020 0
+                    0.15 0 0
+                ]
+                numberOfRays 2
+                aperture 1
+            }
+
+            # center sensor
+            DistanceSensor {
+                translation 0.092 0 0.038
+                rotation 0 0 1 0
+                children [USE SENSOR]
+                name "center"
+                lookupTable [
+                    0 1020 0
+                    0.05 1020 0
+                    0.15 0 0
+                ]
+                numberOfRays 2
+                aperture 1
+            }
+        ]
+        
+        # La hitbox
+        boundingObject Transform {
+            # translation 0 0 0.0415 #0.0415 la mi hauteur
+            translation 2.5e-3 0 2.55e-2 # 5e-2/2 = 2.5e-2. On prend 2.51 pour éviter les frottements qui empèchent le robot de se mouvoir
+            children [
+                Cylinder {
+                    height 5e-2 
+                    radius 9.25e-2 #9e-2
+                }
+            ]
+        }
+    }
+}

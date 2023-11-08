@@ -26,4 +26,4 @@ services:
   
 networks:
   ros_nw: 
-    name: ros_nw
+    driver: bridge
