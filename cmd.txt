@@ -1,0 +1,11 @@
+RUN rosdep init && rosdep update && rosdep install --from-paths src --ignore-src --rosdistro humble
+
+RUN colcon build
+
+RUN source install/local_setup.bash
+
+ros2 launch iapsibot_sim_pkg robot_launch.py
+
+
+Error: USER or USERNAME environment variable not set, falling back to 'default' username.
+
