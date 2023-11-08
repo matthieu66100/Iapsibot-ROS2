@@ -8,4 +8,3 @@ ros2 launch iapsibot_sim_pkg robot_launch.py
 
 
 Error: USER or USERNAME environment variable not set, falling back to 'default' username.
-

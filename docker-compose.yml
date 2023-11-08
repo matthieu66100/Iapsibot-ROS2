@@ -5,8 +5,8 @@ services:
     container_name : VNC
     image: theasp/novnc:latest
     environment:
-      - "DISPLAY_WIDTH=3000"
-      - "DISPLAY_HEIGHT=1800"
+      - "DISPLAY_WIDTH=1920"
+      - "DISPLAY_HEIGHT=1080"
       - "RUN_XTERM=no"
     ports: 
       - "8080:8080"
