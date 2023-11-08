@@ -1,0 +1,29 @@
+version: '2'
+
+services:
+  novnc:
+    container_name : VNC
+    image: theasp/novnc:latest
+    environment:
+      - "DISPLAY_WIDTH=3000"
+      - "DISPLAY_HEIGHT=1800"
+      - "RUN_XTERM=no"
+    ports: 
+      - "8080:8080"
+    networks: 
+      - ros_nw
+  
+  ros:
+    image: ros_iapsibot:latest
+    build: 
+      context: .
+    container_name : bipboup
+    depends_on:
+      - novnc
+    networks: 
+      - ros_nw
+    tty: true
+  
+networks:
+  ros_nw: 
+    driver: bridge
