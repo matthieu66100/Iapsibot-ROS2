@@ -1,13 +1,13 @@
 FROM osrf/ros:humble-desktop
 
-# Set the working directory to /ros2_ws
-WORKDIR /ros2_ws
+ARG UID=1000
+
 # Expose port 1234 for webots
 EXPOSE 1234
 # Use bash instead of sh
 SHELL ["/bin/bash", "-c"]
 # Copy the pkg list to the container
-COPY ./src /ros2_ws/src
+# COPY ./src /ros2_ws/src
 
 # Remove old version of rosdep depencies
 RUN rm -rf /etc/ros/rosdep/sources.list.d/20-default.list
@@ -30,8 +30,13 @@ RUN rm -rf /etc/ros/rosdep/sources.list.d/20-default.list
 RUN source /opt/ros/humble/setup.bash
 # run rosdep update to update the package dependencies
 RUN rosdep init && rosdep update 
+
+COPY ./src /ros2_ws/src
 # Install dependencies
-RUN rosdep install --from-paths src --ignore-src --rosdistro humble -y
+RUN cd /ros2_ws && rosdep install --from-paths src --ignore-src --rosdistro humble -y
 
 # Set the display on NOVNC docker
 ENV DISPLAY=novnc:0.0
+
+# Set the working directory to /ros2_ws
+WORKDIR /ros2_ws
