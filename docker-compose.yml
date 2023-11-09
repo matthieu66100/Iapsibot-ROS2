@@ -25,7 +25,7 @@ services:
     networks: 
       - ros_nw
     volumes:
-      -  /Users/tomarok/Github/Apside/bipbop/src:/ros_nw/src
+      -  ./src:/ros_nw/src
 
     tty: true
   
