@@ -42,6 +42,9 @@ RUN apt update
  
 RUN apt install webots -y
 
+RUN wget 'https://raw.githubusercontent.com/laurent22/wslpath/master/wslpath' && chmod 755 wslpath && mv wslpath /usr/bin
+
+RUN export WEBOTS_HOME=/usr/local/webots
 # Set the display on NOVNC docker
 ENV DISPLAY=novnc:0.0
 
