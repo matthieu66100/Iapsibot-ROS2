@@ -14,10 +14,8 @@ services:
       - ros_nw
   
   ros:
-    image: ros_iapsibot:latest
-    build: 
-      context: .
     container_name : bipboup
+    image: tomarok/bipboup-v2:latest
     depends_on:
       - novnc
     ports: 
@@ -25,7 +23,7 @@ services:
     networks: 
       - ros_nw
     volumes:
-      -  ./src:/ros_nw/src
+      - ./src:/ros_nw/src
 
     tty: true
   

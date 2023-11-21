@@ -1,5 +1,7 @@
 FROM osrf/ros:humble-desktop
 
+VOLUME [ "/usr/local/webots" ]
+
 # Expose port 1234 for webots
 EXPOSE 1234
 # Use bash instead of sh
@@ -33,20 +35,12 @@ COPY ./src /ros2_ws/src
 # Install dependencies
 RUN cd /ros2_ws && rosdep install --from-paths src --ignore-src --rosdistro humble -y
 
-
-
-RUN mkdir -p /etc/apt/keyrings && cd /etc/apt/keyrings
-RUN cd /etc/apt/keyrings && wget -q https://cyberbotics.com/Cyberbotics.asc
-RUN echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/Cyberbotics.asc] https://cyberbotics.com/debian binary-amd64/" | sudo tee /etc/apt/sources.list.d/Cyberbotics.list
-RUN apt update
- 
-RUN apt install webots -y
-
-RUN wget 'https://raw.githubusercontent.com/laurent22/wslpath/master/wslpath' && chmod 755 wslpath && mv wslpath /usr/bin
-
-RUN export WEBOTS_HOME=/usr/local/webots
 # Set the display on NOVNC docker
 ENV DISPLAY=novnc:0.0
+
+# Set the webots home
+
+ENV WEBOTS_HOME=/usr/local/webots
 
 # Set the working directory to /ros2_ws
 WORKDIR /ros2_ws
