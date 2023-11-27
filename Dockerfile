@@ -13,7 +13,7 @@ SHELL ["/bin/bash", "-c"]
 RUN rm -rf /etc/ros/rosdep/sources.list.d/20-default.list
 
 # Update and install packages and tools
-RUN apt-get update && apt-get install -y git wget python3-pip python3-rosdep python3-colcon-common-extensions vim
+RUN apt-get update && apt-get install -y git wget python3-pip python3-rosdep python3-colcon-common-extensions vim && apt-get clean && rm -rf /var/lib/apt/lists/*
 RUN pip3 install setuptools==58.2
 
 # Copiez le script de configuration ROS 2 dans le conteneur
@@ -33,7 +33,10 @@ RUN rosdep init && rosdep update
 
 COPY ./src /ros2_ws/src
 # Install dependencies
-RUN cd /ros2_ws && rosdep install --from-paths src --ignore-src --rosdistro humble -y
+
+WORKDIR /ros2_ws
+
+RUN rosdep install --from-paths src --ignore-src --rosdistro humble -y
 
 # Set the display on NOVNC docker
 ENV DISPLAY=novnc:0.0
